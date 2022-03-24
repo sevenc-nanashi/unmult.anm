@@ -1,7 +1,0 @@
-require("Unmult_dll")
-
-data, w, h = obj.getpixeldata()
-
-Unmult_dll.unmult_color(data, w, h)
-
-obj.putpixeldata(data)
