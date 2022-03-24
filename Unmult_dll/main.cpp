@@ -40,7 +40,7 @@ int unmult_color(lua_State* L) {
                 else if (tg > 0) {
                     a = (pixels[index].g * 255) / tg;
                 }
-                else if (tg > 0) {
+                else if (tb > 0) {
                     a = (pixels[index].b * 255) / tb;
                 };
 
