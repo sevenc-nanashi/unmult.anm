@@ -19,44 +19,38 @@ int unmult_color(lua_State* L) {
     for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
             int index = x + w * y;
-            if (pixels[index].a < 255) {
-                pixels[index].r *= pixels[index].a / 256;
-                pixels[index].g *= pixels[index].a / 256;
-                pixels[index].b *= pixels[index].a / 256;
+            float r = pixels[index].r;
+            float g = pixels[index].g;
+            float b = pixels[index].b;
+            float a = pixels[index].a;
+            if (a < 255) {
+                r = (r * a) / 256;
+                g = (g * a) / 256;
+                b = (b * a) / 256;
             }
-            int rgb[3] = { pixels[index].r, pixels[index].g, pixels[index].b };
-            float rate = static_cast<float>(255) / *std::max_element(
-                rgb,
-                rgb + 3
-            );
-            if (rate != +INFINITY) {
-                int tr = pixels[index].r * rate;
-                int tg = pixels[index].g * rate;
-                int tb = pixels[index].b * rate;
+            int max = std::max(std::max(pixels[index].r, pixels[index].g), pixels[index].b);
+            if (max > 0) {
+                float rate = static_cast<float>(255) / max;
+                int tr = static_cast<int>(pixels[index].r * rate);
+                int tg = static_cast<int>(pixels[index].g * rate);
+                int tb = static_cast<int>(pixels[index].b * rate);
                 int a = 0;
-                if (tr > 0) {
-                    a = (pixels[index].r * 255) / tr;
+                if (tb > 0) {
+                    a = (pixels[index].b * 256) / tb;
                 }
                 else if (tg > 0) {
-                    a = (pixels[index].g * 255) / tg;
+                    a = (pixels[index].g * 256) / tg;
                 }
-                else if (tb > 0) {
-                    a = (pixels[index].b * 255) / tb;
-                };
-
-                if (tr > 255) {
-                    tr = 255;
-                };
-                if (tg > 255) {
-                    tg = 255;
-                };
-                if (tb > 255) {
-                    tb = 255;
-                };
-                pixels[index].r = tr;
-                pixels[index].g = tg;
-                pixels[index].b = tb;
-                pixels[index].a = a;
+                else if (tr > 0) {
+                    a = (pixels[index].r * 256) / tr;
+                }
+                else {
+                    a = 0;
+                }
+                pixels[index].r = std::clamp(tr, 0, 255);
+                pixels[index].g = std::clamp(tg, 0, 255);
+                pixels[index].b = std::clamp(tb, 0, 255);
+                pixels[index].a = std::clamp(a, 0, 255);
             }
             else {
                 pixels[index].r = 0;
