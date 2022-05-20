@@ -72,7 +72,7 @@ static luaL_Reg functions[] = {
 
 extern "C" {
     __declspec(dllexport) int luaopen_Unmult_dll(lua_State* L) {
-        luaL_register(L, "Unmult_dll", functions);
+        luaL_register(L, "unmult_core", functions);
         return 1;
     }
 }
