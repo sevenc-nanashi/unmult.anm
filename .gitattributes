@@ -1,3 +1,2 @@
-*.vcproj    text eol=crlf
 *.anm       text eol=crlf linguist-language=lua
 
