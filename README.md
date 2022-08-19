@@ -1,4 +1,4 @@
-# demult.anm
+# unmult.anm
 [【AVIUtl】黒背景の素材を半透明にするスクリプト【unmult】](https://www.nicovideo.jp/watch/sm39935396) のDLL版。
 
 ## インストール
