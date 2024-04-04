@@ -1,3 +1,6 @@
+> [!CAUTION]
+> [mes51/AVIUtl_Unmult](https://github.com/mes51/AVIUtl_Unmult)を使って下さい。
+
 # unmult.anm
 [【AVIUtl】黒背景の素材を半透明にするスクリプト【unmult】](https://www.nicovideo.jp/watch/sm39935396) のDLL版。
 
